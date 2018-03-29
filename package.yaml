@@ -1,0 +1,48 @@
+name:                MalHaskell
+version:             0.1.0.0
+github:              "emergent/MalHaskell"
+license:             BSD3
+author:              "Satoshi Yoshikawa"
+maintainer:          "yosikawa@gmail.com"
+copyright:           "Copyright (c) 2018 emergent"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on Github at <https://github.com/emergent/MalHaskell#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+
+library:
+  source-dirs: src
+
+executables:
+  mal0:
+    main:                step0_repl.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - MalHaskell
+
+tests:
+  MalHaskell-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    dependencies:
+    - MalHaskell
