@@ -1,15 +1,16 @@
 import System.IO
+import Control.Monad (unless)
 
-mal_read :: String -> String
-mal_read str = str
+malRead :: String -> String
+malRead str = str
 
---mal_eval :: String -> String
-mal_eval ast = ast
+malEval :: String -> String
+malEval ast = ast
 
---mal_print :: String -> IO ()
-mal_print exp = putStrLn exp
+malPrint :: String -> IO ()
+malPrint = putStrLn
 
-mal_rep str = str
+malRep str = str
 
 prompt = putStr "mal> " >> hFlush stdout
 
@@ -17,13 +18,11 @@ mainLoop :: IO ()
 mainLoop = do
     prompt
     line <- getLine
-    if not $ null line
-        then do
-            let r = mal_eval $ mal_read line
-            mal_print r
-            mainLoop
-        else
-            return ()
+    unless (null line) $ do
+        let r = malEval $ malRead line
+        malPrint r
+        mainLoop
+
 
 main :: IO ()
 main = mainLoop
